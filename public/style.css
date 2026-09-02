@@ -161,9 +161,9 @@ body {
   color: var(--success);
 }
 
-.stat-icon--alert {
-  background: var(--danger-soft);
-  color: var(--danger-dark);
+.stat-icon--done {
+  background: var(--success-soft);
+  color: var(--success);
 }
 
 .stat-content {

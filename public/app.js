@@ -13,7 +13,7 @@ const taskList = document.getElementById('task-list');
 
 const statNotes = document.getElementById('stat-notes');
 const statTasks = document.getElementById('stat-tasks');
-const statIncomplete = document.getElementById('stat-incomplete');
+const statCompleted = document.getElementById('stat-completed');
 
 const reflectionForm = document.getElementById('reflection-form');
 const reflectionCommentInput = document.getElementById('reflection-comment');
@@ -75,7 +75,7 @@ async function refreshDashboard() {
     const stats = await apiRequest('/api/dashboard');
     statNotes.textContent = stats.noteCount;
     statTasks.textContent = stats.taskCount;
-    statIncomplete.textContent = stats.incompleteTaskCount;
+    statCompleted.textContent = stats.completedTaskCount;
     renderLatestReflection(stats.latestReflection);
   } catch (err) {
     console.error(err);

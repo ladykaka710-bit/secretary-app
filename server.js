@@ -167,7 +167,7 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJSON(res, 200, {
       noteCount: notes.length,
       taskCount: tasks.length,
-      incompleteTaskCount: tasks.filter((t) => !t.completed).length,
+      completedTaskCount: tasks.filter((t) => t.completed).length,
       latestReflection: getLatestReflection(reflections),
     });
   }

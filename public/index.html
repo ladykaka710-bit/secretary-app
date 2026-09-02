@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>秘書アプリ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3.5" width="14" height="17" rx="2.5" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M9 3.5h6v1.6a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1V3.5Z" fill="currentColor"/>
+          <path d="M8.2 11h7.6M8.2 14.4h7.6M8.2 17.8h4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="brand-text">
+        <h1>秘書アプリ</h1>
+        <p class="app-subtitle">メモとタスクを、ひとつの画面で。</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ダッシュボード -->
+  <section class="dashboard" aria-label="ダッシュボード">
+    <div class="stat-card">
+      <span class="stat-icon stat-icon--note" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v11.6L14 21H7a1.5 1.5 0 0 1-1.5-1.5V5A1.5 1.5 0 0 1 7 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M18.5 16.6H15a1 1 0 0 0-1 1V21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M8.5 8h7M8.5 11.2h7M8.5 14.4h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="stat-content">
+        <div class="stat-value" id="stat-notes">0</div>
+        <div class="stat-label">メモ件数</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-icon stat-icon--task" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M8.2 12.3l2.4 2.4 5.2-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div class="stat-content">
+        <div class="stat-value" id="stat-tasks">0</div>
+        <div class="stat-label">タスク件数</div>
+      </div>
+    </div>
+
+    <div class="stat-card stat-card--accent">
+      <span class="stat-icon stat-icon--alert" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="8.3" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 8v4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="12" cy="15.6" r="1" fill="currentColor"/>
+        </svg>
+      </span>
+      <div class="stat-content">
+        <div class="stat-value" id="stat-incomplete">0</div>
+        <div class="stat-label">未完了タスク</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新の振り返り -->
+  <section class="reflection-highlight" aria-label="最新の振り返り">
+    <span class="reflection-highlight__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 6c-2-1.4-4.6-1.9-7-1.4v13.4c2.4-.5 5 0 7 1.4 2-1.4 4.6-1.9 7-1.4V4.6c-2.4-.5-5 0-7 1.4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M12 6v13.4" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </span>
+    <div class="reflection-highlight__content">
+      <div class="reflection-highlight__label">最新の振り返り</div>
+      <div class="reflection-highlight__week" id="latest-reflection-week">まだ記録がありません</div>
+      <p class="reflection-highlight__comment is-empty" id="latest-reflection-comment">
+        週の振り返りを記録すると、ここに最新の内容が表示されます。
+      </p>
+    </div>
+  </section>
+
+  <main class="main-grid">
+    <!-- メモ -->
+    <section class="panel" aria-label="メモ">
+      <div class="panel-header">
+        <span class="panel-icon panel-icon--note" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v11.6L14 21H7a1.5 1.5 0 0 1-1.5-1.5V5A1.5 1.5 0 0 1 7 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M18.5 16.6H15a1 1 0 0 0-1 1V21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <h2>メモ</h2>
+      </div>
+
+      <form id="note-form" class="form">
+        <div class="field">
+          <label for="note-title">タイトル</label>
+          <input
+            type="text"
+            id="note-title"
+            placeholder="例: 買い物リスト"
+            maxlength="100"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="note-content">本文</label>
+          <textarea
+            id="note-content"
+            placeholder="メモの内容を入力"
+            rows="3"
+            maxlength="2000"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          メモを追加
+        </button>
+        <p class="error-message" id="note-error"></p>
+      </form>
+
+      <div class="list-divider"><span>一覧</span></div>
+
+      <ul class="list" id="note-list">
+        <li class="empty-state">まだメモがありません</li>
+      </ul>
+    </section>
+
+    <!-- タスク -->
+    <section class="panel" aria-label="タスク">
+      <div class="panel-header">
+        <span class="panel-icon panel-icon--task" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M8.2 12.3l2.4 2.4 5.2-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <h2>タスク</h2>
+      </div>
+
+      <form id="task-form" class="form">
+        <div class="field">
+          <label for="task-title">タスク内容</label>
+          <input
+            type="text"
+            id="task-title"
+            placeholder="例: 資料を提出する"
+            maxlength="200"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          タスクを追加
+        </button>
+        <p class="error-message" id="task-error"></p>
+      </form>
+
+      <div class="list-divider"><span>一覧</span></div>
+
+      <ul class="list" id="task-list">
+        <li class="empty-state">まだタスクがありません</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- 週次振り返り -->
+  <section class="panel panel-wide" aria-label="週次振り返り">
+    <div class="panel-header">
+      <span class="panel-icon panel-icon--reflection" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 6c-2-1.4-4.6-1.9-7-1.4v13.4c2.4-.5 5 0 7 1.4 2-1.4 4.6-1.9 7-1.4V4.6c-2.4-.5-5 0-7 1.4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M12 6v13.4" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+      </span>
+      <h2>週次振り返り</h2>
+    </div>
+
+    <form id="reflection-form" class="form">
+      <div class="field">
+        <label id="reflection-week-label" for="reflection-comment">今週の振り返り</label>
+        <textarea
+          id="reflection-comment"
+          placeholder="今週の成果や気づき、来週に向けての改善点などを記録しましょう"
+          rows="4"
+          maxlength="2000"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 4.5h11l3 3v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M8 4.5v5h7v-5M8 20v-6h8v6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        振り返りを保存
+      </button>
+      <p class="error-message" id="reflection-error"></p>
+    </form>
+
+    <div class="list-divider"><span>過去の振り返り</span></div>
+
+    <ul class="list" id="reflection-list">
+      <li class="empty-state">まだ振り返りが記録されていません</li>
+    </ul>
+  </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

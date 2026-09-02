@@ -1,0 +1,10 @@
+{
+  "name": "secretary-app",
+  "version": "1.0.0",
+  "description": "自分専用の秘書アプリ（メモ・タスク管理・ダッシュボード）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}

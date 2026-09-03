@@ -44,6 +44,7 @@ async function handleApi(request, env, pathname) {
       noteCount: notes.length,
       taskCount: tasks.length,
       completedTaskCount: tasks.filter((t) => t.completed).length,
+      incompleteTaskCount: tasks.filter((t) => !t.completed).length,
       latestReflection: getLatestReflection(reflections),
     });
   }

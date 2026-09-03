@@ -31,6 +31,9 @@
   --teal: #0d9488;
   --teal-dark: #0f766e;
   --teal-soft: #e3f6f4;
+  --amber: #d97706;
+  --amber-dark: #b45309;
+  --amber-soft: #fef3e2;
 
   /* 形状・影 */
   --radius-lg: 18px;
@@ -114,7 +117,7 @@ body {
 
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 32px;
 }
@@ -164,6 +167,11 @@ body {
 .stat-icon--done {
   background: var(--success-soft);
   color: var(--success);
+}
+
+.stat-icon--pending {
+  background: var(--amber-soft);
+  color: var(--amber-dark);
 }
 
 .stat-content {

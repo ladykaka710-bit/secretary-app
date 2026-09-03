@@ -14,6 +14,7 @@ const taskList = document.getElementById('task-list');
 const statNotes = document.getElementById('stat-notes');
 const statTasks = document.getElementById('stat-tasks');
 const statCompleted = document.getElementById('stat-completed');
+const statIncomplete = document.getElementById('stat-incomplete');
 
 const reflectionForm = document.getElementById('reflection-form');
 const reflectionCommentInput = document.getElementById('reflection-comment');
@@ -76,6 +77,7 @@ async function refreshDashboard() {
     statNotes.textContent = stats.noteCount;
     statTasks.textContent = stats.taskCount;
     statCompleted.textContent = stats.completedTaskCount;
+    statIncomplete.textContent = stats.incompleteTaskCount;
     renderLatestReflection(stats.latestReflection);
   } catch (err) {
     console.error(err);

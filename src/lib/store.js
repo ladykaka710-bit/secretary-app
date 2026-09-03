@@ -25,12 +25,11 @@ export const Store = {
   saveReflections: (kv, list) => saveList(kv, KEYS.reflections, list),
 };
 
-// Pages プロジェクトの Settings > Functions > KV namespace bindings で
-// この名前（SECRETARY_KV）でバインドしてください
+// wrangler.jsonc の kv_namespaces で binding 名を "SECRETARY_KV" として設定しています
 export function getKv(env) {
   if (!env.SECRETARY_KV) {
     throw new Error(
-      'KVバインディング "SECRETARY_KV" が見つかりません。CloudflareダッシュボードのPagesプロジェクト設定でKV namespaceをバインドしてください。'
+      'KVバインディング "SECRETARY_KV" が見つかりません。wrangler.jsonc の kv_namespaces 設定を確認してください。'
     );
   }
   return env.SECRETARY_KV;
